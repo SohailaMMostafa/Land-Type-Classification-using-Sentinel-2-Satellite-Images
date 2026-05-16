@@ -12,7 +12,15 @@ from models import create_model
 from dataset import EuroSatDataset  # to get class names (optional)
 
 app = FastAPI(title="EuroSAT Land Type Classifier API")
-
+# ── CORS ──────────────────────────────────────────────────
+# Allow requests from any origin (browser tabs, local HTML files,
+# the Claude.ai preview, relay tabs, etc.)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # ========================= CONFIG =========================
 MODEL_PATH = "models/Best_AlexNet.pth"
 PCA_PATH = "models/pca_8components.pkl"
