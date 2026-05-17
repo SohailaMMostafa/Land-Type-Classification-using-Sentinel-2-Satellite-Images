@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── STARFIELD CANVAS ─── */
+#canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ─── GRID OVERLAY ─── */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ─── ORBITAL RINGS ─── */
+.orbital-ring {
+  position: fixed;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.06);
+  pointer-events: none;
+  z-index: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.or1 {
+  width: 700px;
+  height: 700px;
+  animation: spin 60s linear infinite;
+}
+
+.or2 {
+  width: 1000px;
+  height: 1000px;
+  animation: spin 90s linear infinite reverse;
+}
+
+.or3 {
+  width: 1300px;
+  height: 1300px;
+  animation: spin 130s linear infinite;
+}
+
+.or1::after,
+.or2::after,
+.or3::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.or1::after {
+  background: #00ff9d;
+  box-shadow: 0 0 12px #00ff9d;
+}
+
+.or2::after {
+  background: #00d4ff;
+  box-shadow: 0 0 10px #00d4ff;
+}
+
+.or3::after {
+  background: #ffb800;
+  box-shadow: 0 0 8px #ffb800;
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* ─── CUSTOM CURSOR ─── */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  border: 1px solid #00d4ff;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+  animation: curPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes curPulse {
+  from {
+    box-shadow: 0 0 5px rgba(0, 212, 255, 0.3);
+  }
+  to {
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 0 0 40px rgba(0, 212, 255, 0.1);
+  }
+}
+
+/* ─── BUTTON STYLES ─── */
+.btn-primary {
+  @apply px-6 py-3 bg-electric text-white rounded font-orbitron font-bold text-sm uppercase tracking-wider
+    hover:bg-neon hover:shadow-lg hover:shadow-neon/50 transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-transparent border border-neon text-neon rounded font-orbitron font-bold text-sm uppercase tracking-wider
+    hover:bg-neon/10 hover:shadow-lg hover:shadow-neon/50 transition-all duration-300;
+}
+
+/* ─── INPUT STYLES ─── */
+.input-field {
+  @apply w-full px-4 py-3 bg-deep border border-neon/30 rounded text-white placeholder-muted
+    focus:outline-none focus:border-neon focus:shadow-lg focus:shadow-neon/20 transition-all duration-300;
+}
+
+/* ─── GLOW EFFECT ─── */
+.glow-effect {
+  @apply shadow-lg shadow-neon/30;
+}
+
+/* ─── CARD STYLES ─── */
+.card {
+  @apply bg-deep border border-neon/20 rounded-lg p-6 backdrop-blur-md hover:border-neon/50 transition-all duration-300;
+}
+
+/* ─── TEXT GRADIENTS ─── */
+.text-gradient {
+  background: linear-gradient(135deg, #1a7fff, #00d4ff, #00ff9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.6s ease-out;
+}
