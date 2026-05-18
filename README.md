@@ -31,7 +31,7 @@ This project develops a deep learning-based system to classify land types (e.g.,
   The dataset organized by class folders: `AnnualCrop`, `Forest`, `HerbaceousVegetation`, `Highway`, `Industrial`, `Pasture`, `PermanentCrop`, `Residential`, `River`, `SeaLake`. Contains the raw Sentinel-2 image patches (all 13 bands).
 
 - **`Interface/`**  
-  Web/streamlit-like inference interface.  
+  Web inference interface.  
   - `Land Type Classification.html` — Main HTML frontend for the classifier.  
   - `dataset.py` — Data loading and preprocessing utilities.  
   - `inference_api.py` — Backend API for running predictions.  
