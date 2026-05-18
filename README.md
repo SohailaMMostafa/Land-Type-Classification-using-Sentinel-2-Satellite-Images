@@ -1,89 +1,164 @@
 # 🛰️ Land Type Classification using Sentinel-2 Satellite Images
 
-This project develops a deep learning-based system to classify land types (e.g., AnnualCrop, Forest, Residential, River, etc.) from **Sentinel-2 satellite imagery**. It leverages the EuroSAT dataset (all bands) and explores multiple CNN architectures (AlexNet, ResNet, EfficientNet, GoogleNet), with hyperparameter tuning, PCA dimensionality reduction, visualizations, and a web interface for inference.
+**A Deep Learning Approach for Multi-Spectral Land Cover Classification**
 
-**Live Demo**: [land-type-classification.vercel.app](https://land-type-classification.vercel.app/)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-orange.svg)](https://pytorch.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-## Project Overview
-
-- **Dataset**: EuroSAT (Sentinel-2 patches with 13 spectral bands, 10 land cover classes).
-- **Models**: CNNs including AlexNet, ResNet, EfficientNet, and GoogleNet.
-- **Key Features**:
-  - Multi-band image processing
-  - Hyperparameter tuning and model selection
-  - Dimensionality reduction with PCA
-  - Spectral indices visualizations (NDVI, NDWI, NDBI)
-  - Trained model inference via a simple web interface
+**Live Demo**: [🌍 land-type-classification.vercel.app](https://land-type-classification.vercel.app/)
 
 ---
 
-## Repository Structure
+## 📌 Project Overview
 
-### Root Files
-- **`WorkFlow.pdf`** — Project workflow diagram and overall pipeline summary.<grok-card data-id="27e33d" data-type="citation_card" data-plain-type="render_inline_citation" ></grok-card>
-
-### Folders
-
-- **`.idea/`**  
-  PyCharm / IntelliJ IDEA project configuration files (ignore for general use).
-
-- **`EuroSATallBands/`**  
-  The dataset organized by class folders: `AnnualCrop`, `Forest`, `HerbaceousVegetation`, `Highway`, `Industrial`, `Pasture`, `PermanentCrop`, `Residential`, `River`, `SeaLake`. Contains the raw Sentinel-2 image patches (all 13 bands).
-
-- **`Interface/`**  
-  Web inference.  
-  - `Land Type Classification.html` — Main HTML frontend for the classifier.  
-  - `dataset.py` — Data loading and preprocessing utilities.  
-  - `inference_api.py` — Backend API for running predictions.  
-  - `models.py` — Model definitions and loading for inference.
-
-- **`Model Selection/`**  
-  Core training and experimentation scripts.  
-  - `PCA.py` / `PCA_CODE.ipynb` — Principal Component Analysis for band reduction.  
-  - `dataset.py` — Dataset handling and loading.  
-  - `hyperparameter_tuning.py` — Hyperparameter search.  
-  - `models.py` — Model architectures (AlexNet, ResNet, etc.).  
-  - `train.py` — General training script.  
-  - `train_AlexNet_gpu.py`, `train_Efficientnet_gpu.py`, `train_GoogleNet_gpu.py`, `train_ResNet_gpu.py` — GPU-optimized training scripts for each architecture.
-
-- **`models/`**  
-  Saved trained models and related artifacts.  
-  - `Best_AlexNet.pth`, `best_hyperparams.pth` — Best performing model weights.  
-  - `pca_8components.pkl` — Fitted PCA transformer.  
-  - `Hyperpaeams tuning.png` — Visualization of hyperparameter results.
-
-- **`results/`**  
-  Training outputs, metrics, and evaluation plots.  
-  - `.png` and `.txt` files for each model (e.g., `AlexNet (1).png`, `ResNet (1).txt`) containing accuracy curves, confusion matrices, classification reports, etc.
-
-- **`visualizations/`**  
-  Exploratory data analysis and spectral visualizations.  
-  - `Source Code.ipynb` — Jupyter notebook with visualization code.  
-  - `Orignal_Functions.py` — Helper functions for plotting.  
-  - `sample_images_rgb.png`, `sample_images_false_color.png` — Example patches.  
-  - `ndvi_maps.png`, `ndwi_maps.png`, `ndbi_maps.png` — Spectral index maps.  
-  - `spectral_signatures.png` — Average spectral signatures per class.
+This project classifies **10 land cover types** using **Sentinel-2 satellite imagery** (all 13 spectral bands). It explores multiple CNN architectures (AlexNet, ResNet, EfficientNet, and GoogLeNet), performs hyperparameter tuning, applies PCA for dimensionality reduction, and includes rich spectral visualizations.
 
 ---
 
-## How to Use
+## 🗂️ Repository Structure
 
-1. **Explore Data & Visualizations** → Check `visualizations/` and `EuroSATallBands/`.
-2. **Reproduce Training** → Run scripts in `Model Selection/`.
-3. **Inference** → Use the `Interface/` folder (open the HTML or run the API).
-4. **Pre-trained Models** → Available in the `models/` folder.
+| Folder / File | Description |
+|---|---|
+| **`EuroSATallBands/`** | Raw dataset organized by 10 land cover classes (Sentinel-2 patches with 13 bands). |
+| **`Model Selection/`** | Core training and experimentation code. |
+| **`Interface/`** | Web-based inference interface. |
+| **`models/`** | Trained model weights and artifacts. |
+| **`results/`** | Training logs, accuracy plots, confusion matrices, and reports. |
+| **`visualizations/`** | EDA, sample images, and spectral analysis. |
+| **`WorkFlow.pdf`** | Complete project workflow diagram. |
 
-## Technologies
+### Detailed File Descriptions
 
-- Python, PyTorch
-- Jupyter Notebooks
-- HTML + Python backend for interface
-- scikit-learn (PCA), Matplotlib/Seaborn
-
-## License
-
-Open source (feel free to use and contribute).
+- **`WorkFlow.pdf`** — High-level project pipeline and methodology overview.
+- **`Model Selection/`** — Contains `dataset.py`, `models.py`, training scripts (`train_*.py`), `hyperparameter_tuning.py`, and PCA experiments.
+- **`Interface/`** — Contains `Land Type Classification.html`, `inference_api.py`, and supporting files for real-time prediction.
+- **`visualizations/`** — Jupyter notebook (`Source Code.ipynb`), plotting functions, RGB/false-color samples, NDVI/NDWI/NDBI maps, and spectral signatures.
 
 ---
 
-**Made with ❤️ for Earth Observation & Deep Learning**
+## 🚀 Quick Start
+
+### Requirements
+
+```bash
+pip install torch torchvision torchaudio scikit-learn matplotlib seaborn pandas numpy rasterio joblib fastapi uvicorn
+```
+
+### Usage
+
+1. **Explore data** → `visualizations/Source Code.ipynb`
+2. **Train models** → Run scripts in `Model Selection/`
+3. **Run inference locally** → Use files in `Interface/`
+
+---
+
+## 📊 Results
+
+| Model | Val Accuracy | Notes |
+|---|---|---|
+| **AlexNet** | **91.80%** ⭐ Best | LR 0.0001 · Batch 32 · 8 Epochs · RMSprop |
+| GoogLeNet | — | Inception multi-scale modules |
+| ResNet-50 | — | 50-layer residual network |
+| EfficientNet | — | Compound scaling |
+
+### AlexNet Training Log (Best Trial)
+
+| Epoch | Val Accuracy |
+|---|---|
+| 1 / 8 | 83.85% |
+| 2 / 8 | 89.78% |
+| 3 / 8 | 89.90% |
+| 4 / 8 | 85.33% |
+| 5 / 8 | 89.97% |
+| 6 / 8 | 91.35% |
+| 7 / 8 | 91.60% |
+| **8 / 8** | **91.80% ✅** |
+
+Best configuration: `lr=0.0001`, `batch_size=32`, `epochs=8`, `optimizer=RMSprop`, `momentum=0.9`
+
+Full training curves, confusion matrices, and classification reports are available in the `results/` folder.
+
+---
+
+## 🧪 Methodology
+
+### 1 · Spectral Normalisation
+All 13 bands are normalised per-channel using min-max scaling to `[0, 1]`. Statistics are computed on the training split only and applied to validation and test sets to prevent data leakage.
+
+### 2 · Dimensionality Reduction (PCA)
+Principal Component Analysis reduces the 13 correlated spectral bands to **8 principal components**, compressing the input while retaining dominant spectral variance and reducing overfitting risk.
+
+### 3 · Model Selection
+Four pre-trained CNNs were benchmarked under identical conditions (same optimiser, schedule, and augmentation policy), all fine-tuned from ImageNet weights with the final head replaced for 10 EuroSAT classes.
+
+### 4 · Hyperparameter Tuning
+Grid search over learning rate, batch size, optimizer, and momentum — logged across 20 trials to find the best configuration.
+
+---
+
+## 🛠️ Technologies Used
+
+| Category | Tools |
+|---|---|
+| Deep Learning | PyTorch, torchvision |
+| Data Processing | NumPy, scikit-learn (PCA), Rasterio |
+| Visualization | Matplotlib, Seaborn |
+| API Backend | FastAPI, Uvicorn |
+| Frontend | HTML, CSS, JavaScript |
+| Environment | CUDA GPU-accelerated training |
+
+---
+
+## 📚 Dataset
+
+**EuroSAT (Sentinel-2)** — 20,000 labelled 64×64 GeoTIFF patches across 10 classes, perfectly balanced at 2,000 images per class. All 13 multispectral bands (443–2190 nm) are preserved in `.tif` format.
+
+| Class | Label |
+|---|---|
+| 🌾 | AnnualCrop |
+| 🌲 | Forest |
+| 🌿 | HerbaceousVegetation |
+| 🛣️ | Highway |
+| 🏭 | Industrial |
+| 🌊 | Pasture |
+| 🏘️ | PermanentCrop |
+| 🏙️ | Residential |
+| 💧 | River |
+| 🏞️ | SeaLake |
+
+> Dataset split: **70% train · 15% validation · 15% test**
+
+---
+
+## 🌐 Live Inference API
+
+The project ships with a FastAPI backend (`inference_api.py`) for real-time `.tif` classification.
+
+```bash
+# Start the API server
+uvicorn inference_api:app --reload
+```
+
+Then open `Interface/Land Type Classification.html` in your browser, set the endpoint to `http://127.0.0.1:8000`, upload a `.tif` patch, and click **Classify Image**.
+
+**Endpoint:** `POST /predict` — accepts a `.tif` file, returns predicted class, confidence score, and full probability distribution.
+
+---
+
+## 🎯 Future Improvements
+
+- [ ] Vision Transformer / Swin Transformer models
+- [ ] Attention maps (Grad-CAM visualizations)
+- [ ] Cloud masking and preprocessing pipeline
+- [ ] Full production deployment (FastAPI on Render + frontend on Vercel)
+
+---
+
+## 👩‍💻 Author
+
+Made with ❤️ for Remote Sensing & Deep Learning
+
+**Sohaila Mostafa** — [GitHub @SohailaMMostafa](https://github.com/SohailaMMostafa)
+
+⭐ Star the repo if you found it useful!
