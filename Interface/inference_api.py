@@ -4,17 +4,12 @@ import torch
 import rasterio
 import numpy as np
 import joblib
-import os
-from PIL import Image
-import io
+from starlette.middleware.cors import CORSMiddleware
 
 from models import create_model
-from dataset import EuroSatDataset  # to get class names (optional)
 
 app = FastAPI(title="EuroSAT Land Type Classifier API")
 # ── CORS ──────────────────────────────────────────────────
-# Allow requests from any origin (browser tabs, local HTML files,
-# the Claude.ai preview, relay tabs, etc.)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
