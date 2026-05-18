@@ -9,7 +9,7 @@ from starlette.middleware.cors import CORSMiddleware
 from models import create_model
 
 app = FastAPI(title="EuroSAT Land Type Classifier API")
-# ── CORS ──────────────────────────────────────────────────
+# ========================= CROS =========================
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -33,7 +33,7 @@ model.to(DEVICE)
 model.eval()
 print(f"✅ Model loaded on {DEVICE}")
 
-# Class names (must match your dataset order)
+# Class names
 CLASSES = [
     "AnnualCrop", "Forest", "HerbaceousVegetation", "Highway", "Industrial",
     "Pasture", "PermanentCrop", "Residential", "River", "SeaLake"
